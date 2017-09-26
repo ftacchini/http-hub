@@ -1,3 +1,4 @@
+import { HttpReponseWriter } from './../response/http-response-writer';
 import { HttpNamedParameterInformation } from './../information/http-named-parameter-information';
 import { HttpEverywhereParameterBuilder } from './../builder/parameter/http-everywhere-parameter-builder';
 import { HttpActivatorMiddleware } from '../middleware/http-activator-middleware';
@@ -27,13 +28,22 @@ export class HttpControllerActivator extends ControllerActivator<Router, Request
         return builder;
     }
 
-    protected turnIntoMiddleware(action: Function): Middleware<any, RequestHandler> {
+    private isHttpReponseWriter(response: any | HttpReponseWriter): response is HttpReponseWriter {
+        return (<HttpReponseWriter>response).writeToResponse !== undefined;
+    }
+
+    protected turnIntoMiddleware(action: (...args: any[]) => any | HttpReponseWriter): Middleware<any, RequestHandler> {
         var requestHandler: RequestHandler = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
             
-            let result: any;
-            
             try {
-                result = await action(request, response); 
+                var result = await action(request, response); 
+
+                if(result &&this.isHttpReponseWriter(result)) {
+                    result.writeToResponse(response, next);
+                }
+                else {
+                    response.json = result;
+                }
             }
             catch(ex) {
                 next(ex);

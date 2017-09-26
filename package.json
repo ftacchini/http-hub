@@ -1,5 +1,5 @@
 {
-  "name": "connect.ts",
+  "name": "http-hub",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -10,15 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ftacchini/connect.ts.git"
+    "url": "git+https://github.com/ftacchini/http-hub.git"
   },
   "author": "ftacchini",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ftacchini/connect.ts/issues"
+    "url": "https://github.com/ftacchini/http-hub/issues"
   },
-  "homepage": "https://github.com/ftacchini/connect.ts#readme",
+  "homepage": "https://github.com/ftacchini/http-hub#readme",
   "dependencies": {
+    "@types/body-parser": "^1.16.5",
+    "body-parser": "^1.18.1",
     "ts-hub": "^1.0.0"
   },
   "typings": "./dts/index.d.ts",

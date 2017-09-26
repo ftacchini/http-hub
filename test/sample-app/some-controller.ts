@@ -1,6 +1,6 @@
 import { MiddlewareHandler } from './some-middleware';
 import { injectable } from 'inversify';
-import { HttpHandler, HttpGet, FromHttpRequest, HttpResponse } from "../src";
+import { HttpHandler, HttpGet, FromHttpRequest, HttpResponse } from "../../src";
 import "reflect-metadata";
 
 @HttpHandler({ name: "someName" })

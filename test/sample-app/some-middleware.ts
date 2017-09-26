@@ -1,6 +1,6 @@
 import { CastParameterTypes, ControllerMiddlewareMetadataBuilder, Handler } from 'ts-hub';
 import { injectable } from 'inversify';
-import { HttpConstructorMiddlewareBuilder } from './../src';
+import { HttpConstructorMiddlewareBuilder } from '../../src';
 import "reflect-metadata";
 
 class MiddlewareInfo {
