@@ -1,3 +1,4 @@
+import { HttpHeaderParameter } from './http-header-parameter';
 import { HttpBodyParameter } from './body/http-body-parameter';
 import { HttpQueryParameter } from './http-query-parameter';
 import { Response, Request } from 'express';
@@ -13,7 +14,8 @@ export class HttpEverywhereParameter implements Parameter<HttpNamedParameterInfo
 
     private static paramTypes: (new (...args: any[]) => Parameter<any>)[] = [
         HttpQueryParameter,
-        HttpBodyParameter
+        HttpBodyParameter,
+        HttpHeaderParameter
     ];
     
     public getValue(request: Request, response: Response) : any {

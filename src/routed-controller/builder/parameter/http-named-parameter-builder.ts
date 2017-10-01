@@ -6,17 +6,18 @@ import { Router } from 'express';
 import * as _ from "lodash";
 
 @injectable()
-export abstract class HttpNamedParameterBuilder extends ParameterBuilder<HttpNamedParameterInformation, Router> {
+export abstract class HttpNamedParameterBuilder<Information extends HttpNamedParameterInformation> extends ParameterBuilder<Information, Router> {
 
     
     constructor(@unmanaged() parameterReader: ParameterReader) {
         super(parameterReader);
     }
 
-    protected abstract createParameterInstance(): Parameter<HttpNamedParameterInformation>;
+    protected abstract createParameterInstance(): Parameter<Information>;
+    protected abstract createInformationInstance(): Information;
 
-    public buildParam(): Parameter<HttpNamedParameterInformation> {
-        var information = new HttpNamedParameterInformation();
+    public buildParam(): Parameter<Information> {
+        var information = this.createInformationInstance();
         this.information = (this.information &&  _.merge(information, this.information)) || information;
         this.information.name || (this.information.name = this.getParameterName());
         
