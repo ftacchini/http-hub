@@ -1,12 +1,12 @@
 import { NextFunction, Response, Request } from 'express';
 import { HttpResponse } from "./http-response";
 
-export class HttpJsonResponse implements HttpResponse {
+export class HttpEjsResponse implements HttpResponse {
 
-    constructor(private value: any) {}
+    constructor(private path: string, private data: any) {}
 
     writeToHttpResponse(request: Request, response: Response, next: NextFunction): void {
-        response.json(this.value);
+        response.render(this.path, this.data);
         next();
     }
 }
