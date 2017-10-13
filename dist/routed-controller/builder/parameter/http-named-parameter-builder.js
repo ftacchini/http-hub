@@ -14,7 +14,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const ts_hub_1 = require("ts-hub");
 const inversify_1 = require("inversify");
-const http_named_parameter_information_1 = require("./../../information/http-named-parameter-information");
 const inversify_2 = require("inversify");
 const express_1 = require("express");
 const _ = require("lodash");
@@ -23,7 +22,7 @@ let HttpNamedParameterBuilder = class HttpNamedParameterBuilder extends ts_hub_1
         super(parameterReader);
     }
     buildParam() {
-        var information = new http_named_parameter_information_1.HttpNamedParameterInformation();
+        var information = this.createInformationInstance();
         this.information = (this.information && _.merge(information, this.information)) || information;
         this.information.name || (this.information.name = this.getParameterName());
         return super.buildParam();

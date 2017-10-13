@@ -14,24 +14,23 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const inversify_1 = require("inversify");
 const ts_hub_1 = require("ts-hub");
-const http_named_parameter_information_1 = require("./../../information/http-named-parameter-information");
-const http_everywhere_parameter_1 = require("./../../parameter/http-everywhere-parameter");
+const parameter_1 = require("./../../parameter");
 const http_named_parameter_builder_1 = require("./http-named-parameter-builder");
-let HttpEverywhereParameterBuilder = class HttpEverywhereParameterBuilder extends http_named_parameter_builder_1.HttpNamedParameterBuilder {
+let HttpBodyParameterBuilder = class HttpBodyParameterBuilder extends http_named_parameter_builder_1.HttpNamedParameterBuilder {
     constructor(parameterReader) {
         super(parameterReader);
     }
     createParameterInstance() {
-        return new http_everywhere_parameter_1.HttpEverywhereParameter();
+        return new parameter_1.HttpBodyParameter();
     }
     createInformationInstance() {
-        return new http_named_parameter_information_1.HttpNamedParameterInformation();
+        return new parameter_1.HttpBodyParameterInformation();
     }
 };
-HttpEverywhereParameterBuilder = __decorate([
+HttpBodyParameterBuilder = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(ts_hub_1.Types.ParamsReader)),
     __metadata("design:paramtypes", [Object])
-], HttpEverywhereParameterBuilder);
-exports.HttpEverywhereParameterBuilder = HttpEverywhereParameterBuilder;
-//# sourceMappingURL=http-everywhere-parameter-builder.js.map
+], HttpBodyParameterBuilder);
+exports.HttpBodyParameterBuilder = HttpBodyParameterBuilder;
+//# sourceMappingURL=http-body-parameter-builder.js.map

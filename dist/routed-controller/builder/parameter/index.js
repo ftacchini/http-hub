@@ -4,6 +4,9 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./http-named-parameter-builder"));
+__export(require("./http-header-parameter-builder"));
+__export(require("./http-body-parameter-builder"));
+__export(require("./http-query-parameter-builder"));
 __export(require("./http-everywhere-parameter-builder"));
 __export(require("./http-request-parameter-builder"));
 __export(require("./http-response-parameter-builder"));

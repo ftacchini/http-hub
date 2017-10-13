@@ -20,6 +20,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const response_1 = require("./../response");
 const http_named_parameter_information_1 = require("./../information/http-named-parameter-information");
 const http_everywhere_parameter_builder_1 = require("./../builder/parameter/http-everywhere-parameter-builder");
 const http_activator_middleware_1 = require("../middleware/http-activator-middleware");
@@ -38,11 +39,17 @@ let HttpControllerActivator = class HttpControllerActivator extends ts_hub_1.Con
         builder.propertyKey = propertyKey;
         return builder;
     }
+    isHttpReponseWriter(response) {
+        return response.writeToHttpResponse !== undefined;
+    }
     turnIntoMiddleware(action) {
         var requestHandler = (request, response, next) => __awaiter(this, void 0, void 0, function* () {
-            let result;
             try {
-                result = yield action(request, response);
+                var result = yield action(request, response);
+                if (!this.isHttpReponseWriter(result)) {
+                    result = new response_1.HttpContentTypeResponse(result);
+                }
+                result.writeToHttpResponse(request, response, next);
             }
             catch (ex) {
                 next(ex);
