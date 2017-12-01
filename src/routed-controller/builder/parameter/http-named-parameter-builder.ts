@@ -4,9 +4,11 @@ import { HttpNamedParameterInformation } from './../../information/http-named-pa
 import { injectable } from 'inversify';
 import { Router } from 'express';
 import * as _ from "lodash";
+import { DefaultParameterBuilder } from 'ts-hub';
 
 @injectable()
-export abstract class HttpNamedParameterBuilder<Information extends HttpNamedParameterInformation> extends ParameterBuilder<Information, Router> {
+export abstract class HttpNamedParameterBuilder<Information extends HttpNamedParameterInformation> 
+       extends DefaultParameterBuilder<Information, Router> {
 
     
     constructor(@unmanaged() parameterReader: ParameterReader) {

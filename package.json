@@ -1,31 +1,42 @@
 {
   "name": "http-hub",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
+  "description": "Http server for Ts-Hub",
+  "main": "dist/src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "unit-test": "jasmine JASMINE_CONFIG_PATH=jasmine.unit-test.json",
+    "integration-test": "jasmine JASMINE_CONFIG_PATH=jasmine.integration-test.json",
     "build": "rimraf dist && rimraf dts && tsc",
-    "testApp": "node dist/test-app/index.js"
+    "version-minor": "npm version minor && git push && git push --tags",
+    "version-patch": "npm version patch && git push && git push --tags",
+    "version-major": "npm version major && git push && git push --tags"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ftacchini/http-hub.git"
+    "url": "git+https://github.com/ftacchini/ts-hub.git"
   },
   "author": "ftacchini",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ftacchini/http-hub/issues"
+    "url": "https://github.com/ftacchini/ts-hub/issues"
   },
-  "homepage": "https://github.com/ftacchini/http-hub#readme",
+  "homepage": "https://github.com/ftacchini/ts-hub#readme",
+  "typings": "./dts/src/index.d.ts",
   "dependencies": {
-    "@types/body-parser": "^1.16.5",
-    "body-parser": "^1.18.1",
-    "ejs": "^2.5.7",
-    "ts-hub": "^1.0.0"
+    "@types/body-parser": "^1.16.8",
+    "@types/express": "^4.0.39",
+    "@types/lodash": "^4.14.50",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "inversify": "^3.0.0",
+    "lodash": "^4.17.4",
+    "reflect-metadata": "^0.1.10",
+    "ts-hub": "^1.5.4"
   },
-  "typings": "./dts/index.d.ts",
   "devDependencies": {
-    "rimraf": "^2.6.1"
+    "@types/jasmine": "^2.6.0",
+    "jasmine": "^2.8.0",
+    "rimraf": "^2.6.1",
+    "typescript": "^2.5.3"
   }
 }

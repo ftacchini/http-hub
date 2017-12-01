@@ -1,1 +1,0 @@
-{"version":3,"file":"http-json-response.js","sourceRoot":"","sources":["../../../src/routed-controller/response/http-json-response.ts"],"names":[],"mappings":";;AAGA;IAEI,YAAoB,KAAU;QAAV,UAAK,GAAL,KAAK,CAAK;IAAG,CAAC;IAElC,mBAAmB,CAAC,OAAgB,EAAE,QAAkB,EAAE,IAAkB;QACxE,QAAQ,CAAC,IAAI,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC;QAC1B,IAAI,EAAE,CAAC;IACX,CAAC;CACJ;AARD,4CAQC"}

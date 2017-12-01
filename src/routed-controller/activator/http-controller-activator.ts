@@ -4,28 +4,29 @@ import { HttpEverywhereParameterBuilder } from './../builder/parameter/http-ever
 import { HttpActivatorMiddleware } from '../middleware/http-activator-middleware';
 import { inject, injectable } from 'inversify';
 import { RequestHandler, Request, Response, Router, NextFunction } from 'express';
-import { ControllerActivator, ParameterBuilder, Middleware, FunctionReader, ParameterReader, Types } from "ts-hub";
+import { ClassMethodControllerActivator, ParameterBuilder, Middleware, FunctionReader, ParameterReader, Types, TsHubLogger } from "ts-hub";
 import * as _ from "lodash";
 
 @injectable()
-export class HttpControllerActivator extends ControllerActivator<Router, RequestHandler> {
+export class HttpControllerActivator extends ClassMethodControllerActivator<Router, RequestHandler> {
 
     constructor(
         @inject(Types.FunctionReader) functionReader: FunctionReader,
-        @inject(Types.ParamsReader) paramsReader: ParameterReader) {
-        super(functionReader, paramsReader);
+        @inject(Types.ParamsReader) paramsReader: ParameterReader,
+        @inject(Types.TsHubLogger) tsHubLogger: TsHubLogger) {
+        super(functionReader, paramsReader, tsHubLogger);
     }
 
 
     protected createDefaultParameterBuilder(target: any, propertyKey: string, name: string, index: number): ParameterBuilder<any, Router> {
         var builder = new HttpEverywhereParameterBuilder(this.paramsReader);
-        builder.arg = index;
-        builder.information = new HttpNamedParameterInformation();
-        builder.information.name = name;
-        builder.target = target;
-        builder.propertyKey = propertyKey;
+        var information = new HttpNamedParameterInformation();
+        information.name = name;
 
-        return builder;
+        return builder.withArgumentIndex(index)
+                      .withInformation(information)
+                      .withTarget(target)
+                      .withPropertyKey(propertyKey);
     }
 
     private isHttpReponseWriter(response: any | HttpResponse): response is HttpResponse {
@@ -37,7 +38,6 @@ export class HttpControllerActivator extends ControllerActivator<Router, Request
             
             try {
                 var result = await action(request, response); 
-
                 if(!this.isHttpReponseWriter(result)) {
                     result = new HttpContentTypeResponse(result);
                 } 

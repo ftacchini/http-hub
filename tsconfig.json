@@ -9,13 +9,15 @@
         "outDir": "dist",
         "experimentalDecorators": true,
         "types": ["reflect-metadata"],
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+        "declaration": true,
+        "declarationDir": "dts"
     },
     "include": [
-        "src/**/*"
+        "src/**/*",
+        "test/**/*"
     ],
     "exclude": [
-        "node_modules",
-        "**/*.spec.ts"
+        "node_modules"
     ]
 }

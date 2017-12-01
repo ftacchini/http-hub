@@ -1,5 +1,5 @@
 import { injectable, unmanaged } from 'inversify';
-import { RouteBuilder, MiddlewareReader, RouteReader, ControllerActivator, Middleware } from "ts-hub";
+import { MiddlewareReader, RouteReader, ControllerActivator, Middleware, DefaultRouteBuilder } from "ts-hub";
 import { HttpRouteInformation } from "../../information";
 import { HttpRouteType } from "../../../http-route-type";
 import { Router as ExpressRouter, RequestHandler } from "express";
@@ -8,7 +8,7 @@ import * as _ from "lodash";
 import "reflect-metadata";
 
 @injectable()
-export abstract class HttpRouteBuilder extends RouteBuilder<HttpRouteInformation, ExpressRouter, RequestHandler> {
+export abstract class HttpRouteBuilder extends DefaultRouteBuilder<HttpRouteInformation, ExpressRouter, RequestHandler> {
 
     constructor(
         @unmanaged() middlewareReader: MiddlewareReader, 

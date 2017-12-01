@@ -1,12 +1,12 @@
 import { HttpRequestParameter } from './../../parameter/http-request-parameter';
-import { ParameterReader, ParameterBuilder, Parameter } from 'ts-hub';
+import { ParameterReader, Parameter, DefaultParameterBuilder } from 'ts-hub';
 import { unmanaged } from 'inversify';
 import { injectable } from 'inversify';
 import { Router } from 'express';
 import * as _ from "lodash";
 
 @injectable()
-export class HttpRequestParameterBuilder extends ParameterBuilder<undefined, Router> {
+export class HttpRequestParameterBuilder extends DefaultParameterBuilder<undefined, Router> {
 
     
     constructor(@unmanaged() parameterReader: ParameterReader) {
