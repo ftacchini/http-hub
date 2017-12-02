@@ -4,3 +4,4 @@ export * from "./http-route";
 export * from "./builder";
 export * from "./activator";
 export * from "./middleware";
+export * from "./parameter";
