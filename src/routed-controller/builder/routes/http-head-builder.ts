@@ -1,3 +1,4 @@
+import { HttpVerb } from './../../../http-route-type';
 import { MiddlewareReader, ControllerActivator, Middleware, Types } from "ts-hub";
 import { HttpRouteBuilder } from "./http-route-builder";
 import { HttpRouteType } from "../../../http-route-type";
@@ -15,7 +16,7 @@ export class HttpHeadBuilder extends HttpRouteBuilder {
     }
 
     public getDefaultRouteType(): HttpRouteType {
-        return "head";
+        return HttpVerb.HEAD;
     }
 
     

@@ -1,1 +1,2 @@
 export type HttpRouteType = "get" | "post" | "head" | "put" | "delete" | "all" | "patch";
+export enum HttpVerb { GET = "get", POST = "post", HEAD = "head", PUT = "put", DELETE = "delete", ALL = "all",  PATCH = "patch" }
