@@ -19,12 +19,39 @@ export class HttpServer implements Server {
         return this._app;
     }
 
-    public run(): void {
-        this._server = this.application.listen(this.port);
+    public run(): Promise<any> {
+        var promise = new Promise((resolve, reject) => {
+            this._server = this.application.listen(this.port, (err: any, server: any) => {
+                if(err) { 
+                    reject(err);
+                } else {
+                    resolve(server)
+                }
+            });
+        });
+
+        return promise;
     }
 
-    public stop(): void {
-        this._server && this._server.close();
+    public stop(): Promise<any> {
+
+        var promise = new Promise((resolve, reject) => {
+
+            if(this._server){
+                this._server.close((err: any, server: any) => {
+                    if(err) { 
+                        reject(err);
+                    } else {
+                        resolve(server)
+                    }
+                });
+            }
+            else {
+                resolve();
+            }
+        });
+
+        return promise;
     }
 
 }
