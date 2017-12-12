@@ -30,7 +30,7 @@ export class HttpControllerActivator extends ClassMethodControllerActivator<Rout
     }
 
     private isHttpReponseWriter(response: any | HttpResponse): response is HttpResponse {
-        return (<HttpResponse>response).writeToHttpResponse !== undefined;
+        return response && (<HttpResponse>response).writeToHttpResponse !== undefined;
     }
 
     protected turnIntoMiddleware(action: (...args: any[]) => any | HttpResponse): Middleware<any, RequestHandler> {
