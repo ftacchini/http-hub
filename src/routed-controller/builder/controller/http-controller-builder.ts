@@ -5,6 +5,8 @@ import { HttpServer } from "../../../server/http-server";
 import { Router as ExpressRouter, RequestHandler } from "express";
 import { injectable, inject } from "inversify";
 
+const controllerRegex: RegExp = /(Controller|controller)$/;
+
 @injectable()
 export class HttpControllerBuilder extends RoutedControllerBuilder<HttpControllerInformation, ExpressRouter, RequestHandler, HttpController> {
 
@@ -16,8 +18,12 @@ export class HttpControllerBuilder extends RoutedControllerBuilder<HttpControlle
 
     public buildController() : HttpController {
         this.information || (this.information = new HttpControllerInformation());
-        this.information.name || (this.information.name = this.constructor.name);
+        this.information.name || (this.information.name = this.defaultControllerName());
         return super.buildController();
+    }
+
+    private defaultControllerName(): string {
+        return this.target.name.replace(controllerRegex, ""); 
     }
 
     public supportsServer(server: Server) : boolean {
