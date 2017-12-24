@@ -6,16 +6,6 @@ import { ConstructorMiddlewareBuilder, ControllerActivator, Handler, Middleware,
 @injectable()
 export class HttpConstructorMiddlewareBuilder extends ConstructorMiddlewareBuilder<any, ExpressRouter, RequestHandler>  {
 
-    public information: any;
-    public target: any;
-    public propertyKey: string;
-    public arg: number;
-    public middlewareConstructor: new (...args: any[]) => Handler<any>
-
-    protected get priority() : number{
-        return this.information.priority || 0;
-    }
-
     constructor(
         @inject(Types.HttpControllerActivator) controllerActivator: ControllerActivator<ExpressRouter, RequestHandler>,
         @inject(Types.TsHubLogger) tsHubLogger: TsHubLogger) {
