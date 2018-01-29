@@ -7,7 +7,7 @@ export class HttpRequestParameter implements Parameter<undefined>{
     public index: number;
     public type: any;
     
-    public getValue(request: Request, response: Response) : any {
+    public getValue(staticData: any, request: Request, response: Response) : any {
        return request;
     }
 }

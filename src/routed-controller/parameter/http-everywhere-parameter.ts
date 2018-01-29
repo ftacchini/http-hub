@@ -18,7 +18,7 @@ export class HttpEverywhereParameter implements Parameter<HttpNamedParameterInfo
         HttpHeaderParameter
     ];
     
-    public getValue(request: Request, response: Response) : any {
+    public getValue(staticData: any, request: Request, response: Response) : any {
         return HttpEverywhereParameter.paramTypes.find(paramType => this.tryParameterType(request, response, paramType));
     }
 

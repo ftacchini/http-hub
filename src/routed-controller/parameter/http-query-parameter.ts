@@ -8,7 +8,7 @@ export class HttpQueryParameter implements Parameter<HttpNamedParameterInformati
     public index: number;
     public type: any;
     
-    public getValue(request: Request, response: Response) : any {
+    public getValue(staticData: any, request: Request, response: Response) : any {
         var value = request.query[this.information.name];
         return TypesHelper.instance.castToType(value, this.type);
     }
