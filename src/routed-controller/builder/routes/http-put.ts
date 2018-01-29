@@ -7,7 +7,7 @@ import { injectable, inject } from "inversify";
 import "reflect-metadata";
 
 @injectable()
-export class HttpHeadBuilder extends HttpRouteBuilder {
+export class HttpPut extends HttpRouteBuilder {
 
     constructor(
         @inject(Types.MiddlewareReader) middlewareReader: MiddlewareReader, 
@@ -16,7 +16,7 @@ export class HttpHeadBuilder extends HttpRouteBuilder {
     }
 
     public getDefaultRouteType(): HttpRouteType {
-        return HttpVerb.HEAD;
+        return HttpVerb.PUT;
     }
 
     

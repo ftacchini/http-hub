@@ -3,7 +3,7 @@ import { HttpServer } from "../server/http-server";
 import { HttpControllerInformation } from "./information";
 import { Router as ExpressRouter, RequestHandler } from "express";
 
-export class HttpController implements RoutedController<HttpControllerInformation, ExpressRouter, RequestHandler> {
+export class HttpRoutedController implements RoutedController<HttpControllerInformation, ExpressRouter, RequestHandler> {
 
     public information: HttpControllerInformation;
     public middleware: Middleware<any, ExpressRouter>[];

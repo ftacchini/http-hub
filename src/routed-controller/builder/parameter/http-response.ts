@@ -6,7 +6,7 @@ import { Router } from 'express';
 import * as _ from "lodash";
 
 @injectable()
-export class HttpResponseParameterBuilder extends DefaultParameterBuilder<undefined, Router> {
+export class HttpResponse extends DefaultParameterBuilder<undefined, Router> {
 
     
     constructor(@unmanaged() parameterReader: ParameterReader) {

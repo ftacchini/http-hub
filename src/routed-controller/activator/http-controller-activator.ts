@@ -1,6 +1,6 @@
 import { HttpResponse, HttpContentTypeResponse } from './../response';
 import { HttpNamedParameterInformation } from './../information/http-named-parameter-information';
-import { HttpEverywhereParameterBuilder } from './../builder/parameter/http-everywhere-parameter-builder';
+import { FromHttpRequest } from './../builder/parameter/from-http-request';
 import { HttpActivatorMiddleware } from '../middleware/http-activator-middleware';
 import { inject, injectable } from 'inversify';
 import { RequestHandler, Request, Response, Router, NextFunction } from 'express';
@@ -19,7 +19,7 @@ export class HttpControllerActivator extends ClassMethodControllerActivator<Rout
 
 
     protected createDefaultParameterBuilder(target: any, propertyKey: string, name: string, index: number): ParameterBuilder<any, Router> {
-        var builder = new HttpEverywhereParameterBuilder(this.paramsReader);
+        var builder = new FromHttpRequest(this.paramsReader);
         var information = new HttpNamedParameterInformation();
         information.name = name;
 

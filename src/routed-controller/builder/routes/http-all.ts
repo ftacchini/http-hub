@@ -1,12 +1,13 @@
+import { HttpVerb } from './../../../http-route-type';
 import { MiddlewareReader, ControllerActivator, Middleware, Types } from "ts-hub";
 import { HttpRouteBuilder } from "./http-route-builder";
-import { HttpRouteType, HttpVerb } from "../../../http-route-type";
+import { HttpRouteType } from "../../../http-route-type";
 import { Router, RequestHandler } from "express";
 import { injectable, inject } from "inversify";
 import "reflect-metadata";
 
 @injectable()
-export class HttpDeleteBuilder extends HttpRouteBuilder {
+export class HttpAll extends HttpRouteBuilder {
 
     constructor(
         @inject(Types.MiddlewareReader) middlewareReader: MiddlewareReader, 
@@ -15,7 +16,7 @@ export class HttpDeleteBuilder extends HttpRouteBuilder {
     }
 
     public getDefaultRouteType(): HttpRouteType {
-        return HttpVerb.DELETE;
+        return HttpVerb.ALL;
     }
 
     

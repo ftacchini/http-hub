@@ -1,6 +1,6 @@
 import { RoutedControllerBuilder, Server, MiddlewareReader, RouteReader, Types } from "ts-hub";
 import { HttpControllerInformation } from "../../information";
-import { HttpController } from "../../http-controller";
+import { HttpRoutedController } from "../../http-routed-controller";
 import { HttpServer } from "../../../server/http-server";
 import { Router as ExpressRouter, RequestHandler } from "express";
 import { injectable, inject } from "inversify";
@@ -8,7 +8,7 @@ import { injectable, inject } from "inversify";
 const controllerRegex: RegExp = /(Controller|controller)$/;
 
 @injectable()
-export abstract class AbstractHttpControllerBuilder extends RoutedControllerBuilder<HttpControllerInformation, ExpressRouter, RequestHandler, HttpController> {
+export abstract class AbstractHttpControllerBuilder extends RoutedControllerBuilder<HttpControllerInformation, ExpressRouter, RequestHandler, HttpRoutedController> {
 
     constructor(@inject(Types.MiddlewareReader) middlewareReader: MiddlewareReader,
                 @inject(Types.RouteReader) routeReader: RouteReader){
@@ -16,7 +16,7 @@ export abstract class AbstractHttpControllerBuilder extends RoutedControllerBuil
 
     }
 
-    public buildController() : HttpController {
+    public buildController() : HttpRoutedController {
         this.information || (this.information = new HttpControllerInformation());
         this.information.name || (this.information.name = this.defaultControllerName());
         return super.buildController();
@@ -28,8 +28,8 @@ export abstract class AbstractHttpControllerBuilder extends RoutedControllerBuil
 
     public abstract supportsServer(server: Server) : boolean;
 
-    protected buildRoutedController() : HttpController {
-        return new HttpController();
+    protected buildRoutedController() : HttpRoutedController {
+        return new HttpRoutedController();
     }
     
 }

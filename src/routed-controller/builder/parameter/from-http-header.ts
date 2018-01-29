@@ -5,7 +5,7 @@ import { HttpHeaderParameter } from './../../parameter';
 import { HttpNamedParameterBuilder } from "./http-named-parameter-builder";
 
 @injectable()
-export class HttpHeaderParameterBuilder extends HttpNamedParameterBuilder<HttpNamedParameterInformation> {
+export class FromHttpHeader extends HttpNamedParameterBuilder<HttpNamedParameterInformation> {
     
     constructor(@inject(Types.ParamsReader) parameterReader: ParameterReader) {
         super(parameterReader);
