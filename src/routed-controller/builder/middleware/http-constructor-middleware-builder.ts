@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
 import { inject } from 'inversify';
 import { Router as ExpressRouter, RequestHandler } from "express";
-import { ConstructorMiddlewareBuilder, ControllerActivator, Handler, Middleware, Types, TsHubLogger } from "ts-hub";
+import { ConstructorMiddlewareBuilder, ControllerActivator, Middleware, Types, TsHubLogger } from "ts-hub";
 
 @injectable()
 export class HttpConstructorMiddlewareBuilder extends ConstructorMiddlewareBuilder<any, ExpressRouter, RequestHandler>  {
