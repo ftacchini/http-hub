@@ -5,7 +5,7 @@ import { AbstractHttpServer } from "./abstract-http-server";
 
 export class HttpsServer extends AbstractHttpServer<https.Server> {
 
-    public static bootstrap(port: number = 8080, credentials: https.ServerOptions): HttpsServer {
+    public static bootstrap(credentials: https.ServerOptions, port: number = 443): HttpsServer {
         return new HttpsServer(port, credentials);
     }
 

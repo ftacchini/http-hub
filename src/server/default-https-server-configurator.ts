@@ -1,10 +1,10 @@
 import { HttpControllerActivator } from './../routed-controller';
-import { HttpServer } from './http-server';
+import { HttpsServer } from './https-server';
 import { ServerConfigurator, HubContainer, Types } from 'ts-hub';
 
-export class DefaultHttpServerConfigurator implements ServerConfigurator<HttpServer> {
+export class DefaultHttpsServerConfigurator implements ServerConfigurator<HttpsServer> {
     
-    public configureServer(server: HttpServer, container: HubContainer): void {
+    public configureServer(server: HttpsServer, container: HubContainer): void {
         this.configureContainer(container);
     }
 
