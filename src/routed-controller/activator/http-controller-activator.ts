@@ -20,7 +20,7 @@ export class HttpControllerActivator extends ClassMethodControllerActivator<Rout
 
     protected createDefaultParameterBuilder(target: any, propertyKey: string, name: string, index: number): ParameterBuilder<any, Router> {
         var builder = new FromHttpRequest(this.paramsReader);
-        var information = new HttpNamedParameterInformation();
+        var information : HttpNamedParameterInformation = {};
         information.name = name;
 
         return builder.withArgumentIndex(index)

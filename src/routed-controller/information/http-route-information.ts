@@ -1,6 +1,6 @@
 import { HttpRouteType } from "../../http-route-type";
 
-export class HttpRouteInformation {
+export interface HttpRouteInformation {
     path?: string;
     type?: HttpRouteType;
 }

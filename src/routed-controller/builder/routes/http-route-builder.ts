@@ -25,7 +25,7 @@ export abstract class HttpRouteBuilder extends DefaultRouteBuilder<HttpRouteInfo
 
     public buildRoute(router: ExpressRouter): HttpRoute {
 
-        var information = new HttpRouteInformation();
+        var information: HttpRouteInformation = {};
         this.information = (this.information &&  _.merge(information, this.information)) || information;
         this.information.path || (this.information.path = this.propertyKey);
         this.information.type || (this.information.type = this.getDefaultRouteType());

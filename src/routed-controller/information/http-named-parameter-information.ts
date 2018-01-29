@@ -1,3 +1,3 @@
-export class HttpNamedParameterInformation {
+export interface HttpNamedParameterInformation {
     name?: string;
 }

@@ -1,3 +1,3 @@
-export class HttpControllerInformation {
+export interface HttpControllerInformation {
     name?: string
 }

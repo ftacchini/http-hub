@@ -17,7 +17,7 @@ export abstract class AbstractHttpControllerBuilder extends RoutedControllerBuil
     }
 
     public buildController() : HttpRoutedController {
-        this.information || (this.information = new HttpControllerInformation());
+        this.information || (this.information = {});
         this.information.name || (this.information.name = this.defaultControllerName());
         return super.buildController();
     }

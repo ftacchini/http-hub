@@ -16,7 +16,7 @@ export class FromHttpBody extends HttpNamedParameterBuilder<HttpBodyParameterInf
     }
 
     protected createInformationInstance(): HttpBodyParameterInformation {
-        return new HttpBodyParameterInformation();
+        return {};
     }
 
 }

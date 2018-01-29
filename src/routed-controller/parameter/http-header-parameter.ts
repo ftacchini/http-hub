@@ -8,7 +8,7 @@ export class HttpHeaderParameter implements Parameter<HttpNamedParameterInformat
     public index: number;
     public type: any;
     public getValue(staticData: any, request: Request, response: Response) : any {
-        var value = request.header(this.information.name);
+        var value = request.header(this.information && this.information.name);
         return TypesHelper.instance.castToType(value, this.type);
     }
 

@@ -16,7 +16,7 @@ export class FromHttpRequest extends HttpNamedParameterBuilder<HttpNamedParamete
     }
 
     protected createInformationInstance(): HttpNamedParameterInformation {
-        return new HttpNamedParameterInformation();
+        return {};
     }
 
 }
