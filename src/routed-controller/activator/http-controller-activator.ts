@@ -1,4 +1,4 @@
-import { HttpResponse, HttpContentTypeResponse } from './../response';
+import { HttpResult, HttpContentTypeResponse } from './../response';
 import { HttpNamedParameterInformation } from './../information/http-named-parameter-information';
 import { FromHttpRequest } from './../builder/parameter/from-http-request';
 import { HttpActivatorMiddleware } from '../middleware/http-activator-middleware';
@@ -30,11 +30,11 @@ export class HttpControllerActivator extends ClassMethodControllerActivator<Rout
                       .withPropertyKey(propertyKey);
     }
 
-    private isHttpReponseWriter(response: any | HttpResponse): response is HttpResponse {
-        return response && (<HttpResponse>response).writeToHttpResponse !== undefined;
+    private isHttpReponseWriter(response: any | HttpResult): response is HttpResult {
+        return response && (<HttpResult>response).writeToHttpResponse !== undefined;
     }
 
-    protected turnIntoMiddleware(action: (...args: any[]) => any | HttpResponse): Middleware<any, RequestHandler> {
+    protected turnIntoMiddleware(action: (...args: any[]) => any | HttpResult): Middleware<any, RequestHandler> {
         var requestHandler: RequestHandler = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
             
             var result: any;

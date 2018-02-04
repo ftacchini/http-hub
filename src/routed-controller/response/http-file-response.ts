@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from 'express';
-import { HttpResponse } from './http-response';
+import { HttpResult } from './http-result';
 
-export class HttpFileResponse implements HttpResponse {
+export class HttpFileResponse implements HttpResult {
     constructor(private filePath: string, private options?: any) { }
 
     writeToHttpResponse(request: Request, response: Response, next: NextFunction): void {

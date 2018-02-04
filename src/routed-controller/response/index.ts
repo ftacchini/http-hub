@@ -1,4 +1,4 @@
-export * from "./http-response";
+export * from "./http-result";
 export * from "./http-content-type-response";
 export * from "./http-ejs-response";
 export * from "./http-file-response";

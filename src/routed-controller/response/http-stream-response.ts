@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from 'express';
-import { HttpResponse } from "./http-response";
+import { HttpResult } from "./http-result";
 
-export class HttpStreamResponse implements HttpResponse {
+export class HttpStreamResponse implements HttpResult {
 
     constructor(private stream: NodeJS.WritableStream, private options?: { end: boolean }) {}
 

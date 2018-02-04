@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from 'express';
-import { HttpResponse } from "./http-response";
+import { HttpResult } from "./http-result";
 
-export class HttpEjsResponse implements HttpResponse {
+export class HttpEjsResponse implements HttpResult {
 
     constructor(private path: string, private data: any) {}
 

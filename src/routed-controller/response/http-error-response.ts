@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from 'express';
-import { HttpResponse } from "./http-response";
+import { HttpResult } from "./http-result";
 
-export class HttpErrorResponse implements HttpResponse {
+export class HttpErrorResponse implements HttpResult {
 
     constructor(
         public statusCode: number,
