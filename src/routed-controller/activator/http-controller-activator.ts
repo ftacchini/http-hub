@@ -6,6 +6,7 @@ import { inject, injectable } from 'inversify';
 import { RequestHandler, Request, Response, Router, NextFunction } from 'express';
 import { ClassMethodControllerActivator, ParameterBuilder, Middleware, FunctionReader, ParameterReader, Types, TsHubLogger } from "ts-hub";
 import * as _ from "lodash";
+import { HttpErrorResponse } from '../response/http-error-response';
 
 @injectable()
 export class HttpControllerActivator extends ClassMethodControllerActivator<Router, RequestHandler> {
@@ -36,19 +37,20 @@ export class HttpControllerActivator extends ClassMethodControllerActivator<Rout
     protected turnIntoMiddleware(action: (...args: any[]) => any | HttpResponse): Middleware<any, RequestHandler> {
         var requestHandler: RequestHandler = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
             
+            var result: any;
+
             try {
-                var result = await action(request, response); 
+                result = await action(request, response); 
+                
                 if(!this.isHttpReponseWriter(result)) {
                     result = new HttpContentTypeResponse(result);
                 } 
-
-                result.writeToHttpResponse(request, response, next);
             }
             catch(ex) {
-                next(ex);
+                result = new HttpErrorResponse(400, ex);
             }
 
-            next();
+            result.writeToHttpResponse(request, response, next);
         };
 
         return new HttpActivatorMiddleware(requestHandler);
