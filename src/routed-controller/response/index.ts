@@ -5,3 +5,4 @@ export * from "./http-file-response";
 export * from "./http-json-response";
 export * from "./http-stream-response";
 export * from "./http-error-response";
+export * from "./http-next-response";
