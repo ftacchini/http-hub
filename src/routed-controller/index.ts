@@ -5,3 +5,4 @@ export * from "./builder";
 export * from "./activator";
 export * from "./middleware";
 export * from "./parameter";
+export * from "./response";
