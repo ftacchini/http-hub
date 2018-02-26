@@ -1,3 +1,4 @@
+import { HttpTypes } from './../../../http-types';
 import { MiddlewareReader, ControllerActivator, Middleware, Types } from "ts-hub";
 import { HttpRouteBuilder } from "./http-route-builder";
 import { HttpRouteType, HttpVerb } from "../../../http-route-type";
@@ -10,7 +11,7 @@ export class HttpDelete extends HttpRouteBuilder {
 
     constructor(
         @inject(Types.MiddlewareReader) middlewareReader: MiddlewareReader, 
-        @inject(Types.HttpControllerActivator) controllerActivator: ControllerActivator<Router, RequestHandler>) {
+        @inject(HttpTypes.HttpControllerActivator) controllerActivator: ControllerActivator<Router, RequestHandler>) {
         super(middlewareReader, controllerActivator);
     }
 
