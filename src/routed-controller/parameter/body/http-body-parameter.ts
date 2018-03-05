@@ -35,7 +35,7 @@ export class HttpBodyParameter implements Parameter<HttpBodyParameterInformation
     }
 
     private parseBody(parser: any, request: Request, response: Response): Promise<any> {
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             parser(this.information.options)(request, response, (error: any) => {
                 if(error){
                     resolve();
