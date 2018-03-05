@@ -36,16 +36,16 @@ export abstract class AbstractHttpServer<HttpServerType extends { listen: any, c
     public getStatus(): string {
         switch(this.status) {
             case HttpServerStatus.Running:
-                return `${this.httpServerType} running at port ${this.port}`;
+                return `${this.httpServerType} server running at port ${this.port}`;
             case HttpServerStatus.Stopped:
-                return `${this.httpServerType} has been stopped`;
+                return `${this.httpServerType} server has been stopped`;
             case HttpServerStatus.ErrorStarting:
-                return `There was an error starting ${this.httpServerType} at port ${this.port}`;
+                return `There was an error starting ${this.httpServerType} server at port ${this.port}`;
             case HttpServerStatus.ErrorStopping:
-                    return `There was an error stopping ${this.httpServerType} at port ${this.port}`;
+                    return `There was an error stopping ${this.httpServerType} server at port ${this.port}`;
             case HttpServerStatus.NotStarted: 
             default: 
-                return `${this.httpServerType} has not been started`;
+                return `${this.httpServerType} server has not been started`;
         }
     }
 

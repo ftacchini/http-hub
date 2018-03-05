@@ -18,7 +18,7 @@ export class HttpBodyParameter implements Parameter<HttpBodyParameterInformation
          [HttpBodyType.Text, "text"],
          [HttpBodyType.Urlencoded, "urlencoded"]])
     
-    public getValue(request: Request, response: Response) : any {
+    public getValue(staticData: any, request: Request, response: Response) : any {
 
         this.information.type || (this.information.type = HttpBodyType.Json);
 

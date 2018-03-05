@@ -47,6 +47,7 @@ export class HttpControllerActivator extends ClassMethodControllerActivator<Rout
                 } 
             }
             catch(ex) {
+                this.tsHubLogger.error(ex);
                 result = new HttpErrorResponse(400, ex);
             }
 
