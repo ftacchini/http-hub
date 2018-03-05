@@ -34,7 +34,7 @@ export class HttpControllerActivator extends ClassMethodControllerActivator<Rout
         return response && (<HttpResult>response).writeToHttpResponse !== undefined;
     }
 
-    protected turnIntoMiddleware(action: (...args: any[]) => any | HttpResult): Middleware<any, RequestHandler> {
+    protected turnIntoMiddleware(action: (...args: any[]) => Promise<any> | Promise<HttpResult>): Middleware<any, RequestHandler> {
         var requestHandler: RequestHandler = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
             
             var result: any;

@@ -18,7 +18,7 @@ export class HttpBodyParameter implements Parameter<HttpBodyParameterInformation
          [HttpBodyType.Text, "text"],
          [HttpBodyType.Urlencoded, "urlencoded"]])
     
-    public getValue(staticData: any, request: Request, response: Response) : any {
+    public async getValue(staticData: any, request: Request, response: Response) : Promise<any> {
 
         this.information.type || (this.information.type = HttpBodyType.Json);
 
@@ -26,18 +26,25 @@ export class HttpBodyParameter implements Parameter<HttpBodyParameterInformation
             Array.from(HttpBodyParameter.parsersMap.values()) : 
             [HttpBodyParameter.parsersMap.get(this.information.type)];
         
-        var value = parsers.find(parserName => {
+        var possibleValues = await Promise.all(parsers.map(parserName => {
             var parser: any = BodyParser[parserName];
+            return this.parseBody(parser, request, response);
+        }));        
+
+        return TypesHelper.instance.castToType(possibleValues.find(value => value), this.type);
+    }
+
+    private parseBody(parser: any, request: Request, response: Response): Promise<any> {
+        return new Promise((reject, resolve) => {
             parser(this.information.options)(request, response, (error: any) => {
                 if(error){
-                    throw error;
+                    resolve();
+                }
+                else {
+                    resolve(request.body && request.body[this.information.name]);
                 }
             });
-            
-            return request.body && request.body[this.information.name];
-        })        
-
-        return TypesHelper.instance.castToType(value, this.type);
+        });
     }
 
 }
