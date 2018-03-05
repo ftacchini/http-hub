@@ -28,7 +28,7 @@ export class HttpBodyParameter implements Parameter<HttpBodyParameterInformation
         
         var value = parsers.find(parserName => {
             var parser: any = BodyParser[parserName];
-            parser(request, response, (error: any) => {
+            parser(this.information.options)(request, response, (error: any) => {
                 if(error){
                     throw error;
                 }
