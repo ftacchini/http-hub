@@ -4,4 +4,5 @@ export enum HttpBodyType {
     Text,
     Urlencoded,
     Any
+    
 }
