@@ -4,7 +4,6 @@ import { HttpRouteBuilder } from "./http-route-builder";
 import { HttpRouteType, HttpVerb } from "../../../http-route-type";
 import { Router, RequestHandler } from "express";
 import { injectable, inject } from "inversify";
-import "reflect-metadata";
 
 @injectable()
 export class HttpDelete extends HttpRouteBuilder {

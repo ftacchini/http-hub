@@ -5,7 +5,6 @@ import { HttpRouteType } from "../../../http-route-type";
 import { Router as ExpressRouter, RequestHandler } from "express";
 import { HttpRoute } from "../../http-route";
 import * as _ from "lodash";
-import "reflect-metadata";
 
 @injectable()
 export abstract class HttpRouteBuilder extends DefaultRouteBuilder<HttpRouteInformation, ExpressRouter, RequestHandler> {
