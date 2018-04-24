@@ -3,12 +3,13 @@ import { injectable } from 'inversify';
 import { inject } from 'inversify';
 import { Router as ExpressRouter, RequestHandler } from "express";
 import { ConstructorMiddlewareBuilder, ControllerActivator, Middleware, Types, TsHubLogger } from "ts-hub";
+import { ErrorRequestHandler } from 'express-serve-static-core';
 
 @injectable()
-export class HttpConstructorMiddlewareBuilder extends ConstructorMiddlewareBuilder<any, ExpressRouter, RequestHandler>  {
+export class HttpErrorMiddleware extends ConstructorMiddlewareBuilder<any, ExpressRouter, ErrorRequestHandler>  {
 
     constructor(
-        @inject(HttpTypes.HttpControllerActivator) controllerActivator: ControllerActivator<ExpressRouter, RequestHandler>,
+        @inject(HttpTypes.HttpErrorActivator) controllerActivator: ControllerActivator<ExpressRouter, ErrorRequestHandler>,
         @inject(Types.TsHubLogger) tsHubLogger: TsHubLogger) {
             super(controllerActivator, tsHubLogger);
     }

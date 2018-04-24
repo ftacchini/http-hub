@@ -1,4 +1,5 @@
-import { NextFunction, Request, RequestHandler, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { ErrorRequestHandler } from 'express-serve-static-core';
 import { inject, injectable } from 'inversify';
 import { FunctionReader, Middleware, ParameterReader, TsHubLogger, Types } from 'ts-hub';
 
@@ -7,7 +8,7 @@ import { HttpResult } from './../response';
 import { HttpActivator } from './http-activator';
 
 @injectable()
-export class HttpControllerActivator extends HttpActivator<RequestHandler> {
+export class HttpErrorActivator extends HttpActivator<ErrorRequestHandler> {
 
     constructor(
         @inject(Types.FunctionReader) functionReader: FunctionReader,
@@ -17,8 +18,8 @@ export class HttpControllerActivator extends HttpActivator<RequestHandler> {
     }
 
 
-    protected turnIntoMiddleware(action: (...args: any[]) => Promise<any> | Promise<HttpResult>): Middleware<any, RequestHandler> {
-        var requestHandler: RequestHandler = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
+    protected turnIntoMiddleware(action: (...args: any[]) => Promise<any> | Promise<HttpResult>): Middleware<any, ErrorRequestHandler> {
+        var requestHandler: ErrorRequestHandler = async (error: Error, request: Request, response: Response, next: NextFunction): Promise<any> => {
             
             var result: any;
 

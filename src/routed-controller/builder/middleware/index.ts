@@ -1,1 +1,1 @@
-export * from "./http-constructor-middleware-builder";
+export * from "./http-middleware";

@@ -1,4 +1,4 @@
-import { RoutedControllerBuilder, Server, MiddlewareReader, RouteReader, Types } from "ts-hub";
+import { RoutedControllerBuilder, Server, MiddlewareReader, RouteReader, Types, TsHubLogger } from "ts-hub";
 import { HttpControllerInformation } from "../../information";
 import { HttpRoutedController } from "../../http-routed-controller";
 import { HttpServer } from "../../../server/http-server";
@@ -11,8 +11,9 @@ const controllerRegex: RegExp = /(Controller|controller)$/;
 export abstract class AbstractHttpControllerBuilder extends RoutedControllerBuilder<HttpControllerInformation, ExpressRouter, RequestHandler, HttpRoutedController> {
 
     constructor(@inject(Types.MiddlewareReader) middlewareReader: MiddlewareReader,
-                @inject(Types.RouteReader) routeReader: RouteReader){
-        super(middlewareReader, routeReader);
+                @inject(Types.RouteReader) routeReader: RouteReader,
+                @inject(Types.TsHubLogger) tsHubLogger: TsHubLogger){
+        super(middlewareReader, routeReader, tsHubLogger);
 
     }
 

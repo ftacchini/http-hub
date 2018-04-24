@@ -1,3 +1,4 @@
 export const HttpTypes = {
-    HttpControllerActivator: Symbol("HttpControllerActivator")
+    HttpControllerActivator: Symbol("HttpControllerActivator"),
+    HttpErrorActivator: Symbol("HttpErrorActivator")
 }

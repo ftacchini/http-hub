@@ -1,15 +1,16 @@
 import { RequestHandler } from 'express';
-import { HttpMiddleware } from './http-middleware';
+import { Middleware } from 'ts-hub';
+import { ErrorRequestHandler } from 'express-serve-static-core';
 
-export class HttpActivatorMiddleware implements HttpMiddleware<null>{
+export class HttpActivatorMiddleware<HttpRequestHandler extends RequestHandler | ErrorRequestHandler> implements Middleware<null, HttpRequestHandler> {
     public readonly priority: number = 0;
     public readonly information: null = null;
 
-    constructor(private requestHandler: RequestHandler) {
+    constructor(private requestHandler: HttpRequestHandler) {
 
     }
 
-    public getRequestHandler(): RequestHandler {
+    public getRequestHandler(): HttpRequestHandler {
         return this.requestHandler;
     }
 }

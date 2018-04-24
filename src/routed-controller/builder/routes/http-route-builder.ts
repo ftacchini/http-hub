@@ -1,5 +1,5 @@
 import { injectable, unmanaged } from 'inversify';
-import { MiddlewareReader, RouteReader, ControllerActivator, Middleware, DefaultRouteBuilder } from "ts-hub";
+import { MiddlewareReader, RouteReader, ControllerActivator, Middleware, DefaultRouteBuilder, TsHubLogger } from "ts-hub";
 import { HttpRouteInformation } from "../../information";
 import { HttpRouteType } from "../../../http-route-type";
 import { Router as ExpressRouter, RequestHandler } from "express";
@@ -11,8 +11,9 @@ export abstract class HttpRouteBuilder extends DefaultRouteBuilder<HttpRouteInfo
 
     constructor(
         @unmanaged() middlewareReader: MiddlewareReader, 
-        @unmanaged() controllerActivator: ControllerActivator<ExpressRouter, RequestHandler>) {
-        super(middlewareReader, controllerActivator);
+        @unmanaged() controllerActivator: ControllerActivator<ExpressRouter, RequestHandler>,
+        @unmanaged() tsHubLogger: TsHubLogger) {
+        super(middlewareReader, controllerActivator, tsHubLogger);
     }
 
     public supportsRouter(router: ExpressRouter): boolean {

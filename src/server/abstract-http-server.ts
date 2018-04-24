@@ -1,7 +1,7 @@
 import { HttpTypes } from './../http-types';
 import * as express from "express";
 import { Server, HubContainer } from "ts-hub";
-import { HttpControllerActivator } from '../index';
+import { HttpControllerActivator, HttpErrorActivator } from '../index';
 
 export enum HttpServerStatus {
     Running,
@@ -31,6 +31,7 @@ export abstract class AbstractHttpServer<HttpServerType extends { listen: any, c
 
     public setupDependencies(container: HubContainer): void {
         container.bind(HttpTypes.HttpControllerActivator).to(HttpControllerActivator);   
+        container.bind(HttpTypes.HttpErrorActivator).to(HttpErrorActivator);  
     }
 
     public getStatus(): string {
