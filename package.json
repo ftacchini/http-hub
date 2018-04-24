@@ -1,6 +1,6 @@
 {
   "name": "http-hub",
-  "version": "2.1.16",
+  "version": "2.1.17",
   "description": "Http server for Ts-Hub",
   "main": "dist/src/index.js",
   "scripts": {
