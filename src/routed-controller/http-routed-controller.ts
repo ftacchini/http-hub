@@ -1,4 +1,4 @@
-import { RoutedController, Middleware, Route } from "ts-hub";
+import { RoutedController, Middleware, Route, ExecutionOrder } from "ts-hub";
 import { HttpServer } from "../server/http-server";
 import { HttpControllerInformation } from "./information";
 import { Router as ExpressRouter, RequestHandler } from "express";
@@ -16,12 +16,22 @@ export class HttpRoutedController implements RoutedController<HttpControllerInfo
 
     public attachToServer(server: HttpServer) : ExpressRouter {
 
-        var handlers = this.middleware
+        var preActivationHandlers = this.middleware
+            .filter(middleware => middleware.executionOrder == ExecutionOrder.PreActivation)
+            .sort(middleware => middleware.priority)
             .map(middleware => middleware.getRequestHandler());
         
-        handlers.length && this.router.use(handlers);
+        preActivationHandlers.length && this.router.use(preActivationHandlers);
         
         this.routes.forEach(route => route.attachToServer(this.router));
+        
+        var postActivationHandlers = this.middleware
+            .filter(middleware => middleware.executionOrder == ExecutionOrder.PostAcivation)
+            .sort(middleware => middleware.priority)
+            .map(middleware => middleware.getRequestHandler());
+        
+        postActivationHandlers.length && this.router.use(postActivationHandlers);
+        
         server.application.use(`/${this.information.name}`, this.router);
 
         return this.router;
