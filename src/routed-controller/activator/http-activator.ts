@@ -5,7 +5,7 @@ import {
     Middleware,
     ParameterBuilder,
     ParameterReader,
-    TargetPropertyControllerActivator,
+    AbstractControllerActivator,
     TsHubLogger,
 } from 'ts-hub';
 
@@ -14,7 +14,7 @@ import { HttpNamedParameterInformation } from './../information/http-named-param
 import { HttpContentTypeResponse, HttpResult } from './../response';
 
 @injectable()
-export abstract class HttpActivator<HttpRequestHandler extends RequestHandler | ErrorRequestHandler> extends TargetPropertyControllerActivator<Router, HttpRequestHandler> {
+export abstract class HttpActivator<HttpRequestHandler extends RequestHandler | ErrorRequestHandler> extends AbstractControllerActivator<Router, HttpRequestHandler> {
 
     constructor(
         @unmanaged() functionReader: FunctionReader,
