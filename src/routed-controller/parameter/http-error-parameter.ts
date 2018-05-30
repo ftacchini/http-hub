@@ -7,7 +7,7 @@ export class HttpErrorParameter implements Parameter<undefined>{
     public index: number;
     public type: any;
     
-    public getValue(staticData: any, error: Error, request: Request, response: Response) : any {
+    public getValue(staticData: any, request: Request, response: Response, error: Error) : any {
        return error;
     }
 

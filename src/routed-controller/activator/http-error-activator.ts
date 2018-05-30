@@ -24,7 +24,7 @@ export class HttpErrorActivator extends HttpActivator<ErrorRequestHandler> {
             var result: any;
 
             try {
-                result = await action(request, response); 
+                result = await action(request, response, error); 
                 
                 this.writeResponse(result, request, response, next);
             }
