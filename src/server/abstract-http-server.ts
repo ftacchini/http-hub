@@ -2,6 +2,8 @@ import { HttpTypes } from './../http-types';
 import * as express from "express";
 import { Server, HubContainer } from "ts-hub";
 import { HttpControllerActivator, HttpErrorActivator } from '../index';
+import * as http from "http";
+import * as https from "https";
 
 export enum HttpServerStatus {
     Running,
@@ -11,23 +13,27 @@ export enum HttpServerStatus {
     NotStarted
 }
 
-export abstract class AbstractHttpServer<HttpServerType extends { listen: any, close: any }> implements Server {
+export abstract class AbstractHttpServer<HttpServerType extends https.Server | http.Server> implements Server {
 
-    protected app: express.Application;
-    protected server: HttpServerType;
-    protected status: HttpServerStatus;
+    protected _app: express.Application;
+    protected _server: https.Server | http.Server;
+    protected _status: HttpServerStatus;
 
     protected constructor(protected port: number) {
-        this.app = express();
-        this.status = HttpServerStatus.NotStarted;
+        this._app = express();
+        this._status = HttpServerStatus.NotStarted;
     }
 
     public get application(): express.Application {
-        return this.app;
+        return this._app;
+    }
+
+    public get server(): https.Server | http.Server {
+        return this._server;
     }
 
     protected abstract get httpServerType(): string;
-    protected abstract createServer(application: express.Application): HttpServerType;
+    protected abstract createServer(application: express.Application): https.Server | http.Server;
 
     public setupDependencies(container: HubContainer): void {
         container.bind(HttpTypes.HttpControllerActivator).to(HttpControllerActivator);   
@@ -35,7 +41,7 @@ export abstract class AbstractHttpServer<HttpServerType extends { listen: any, c
     }
 
     public getStatus(): string {
-        switch(this.status) {
+        switch(this._status) {
             case HttpServerStatus.Running:
                 return `${this.httpServerType} server running at port ${this.port}`;
             case HttpServerStatus.Stopped:
@@ -53,14 +59,14 @@ export abstract class AbstractHttpServer<HttpServerType extends { listen: any, c
     public run(): Promise<any> {
         
         var promise = new Promise((resolve, reject) => {
-            this.server = this.createServer(this.application);
+            this._server = this.createServer(this.application);
             
-            this.server.listen(this.port, (err: any, server: any) => {
+            this._server.listen(this.port, (err: any, server: any) => {
                 if(err) { 
-                    this.status = HttpServerStatus.ErrorStarting;
+                    this._status = HttpServerStatus.ErrorStarting;
                     reject(err);
                 } else {
-                    this.status = HttpServerStatus.Running;
+                    this._status = HttpServerStatus.Running;
                     resolve(server)
                 }
             });
@@ -73,13 +79,13 @@ export abstract class AbstractHttpServer<HttpServerType extends { listen: any, c
 
         var promise = new Promise((resolve, reject) => {
 
-            if(this.server){
-                this.server.close((err: any, server: any) => {
+            if(this._server){
+                this._server.close((err: any, server: any) => {
                     if(err) { 
-                        this.status = HttpServerStatus.ErrorStopping;
+                        this._status = HttpServerStatus.ErrorStopping;
                         reject(err);
                     } else {
-                        this.status = HttpServerStatus.Stopped;
+                        this._status = HttpServerStatus.Stopped;
                         resolve(server);
                     }
                 });
