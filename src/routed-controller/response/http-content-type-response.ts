@@ -7,14 +7,16 @@ export class HttpContentTypeResponse implements HttpResult {
 
     writeToHttpResponse(request: Request, response: Response, next: NextFunction): void {
 
-        response.format({
-            'application/json': () => {
-                response.json(this.value);
-            },
-            'default': () => {
-                response.send(this.value);
-            }
-        });
+        if(this.value !== undefined) {
+            response.format({
+                'application/json': () => {
+                    response.json(this.value);
+                },
+                'default': () => {
+                    response.send(this.value);
+                }
+            });
+        }
 
         next();
     }

@@ -6,7 +6,7 @@
   "scripts": {
     "unit-test": "jasmine JASMINE_CONFIG_PATH=jasmine.unit-test.json",
     "integration-test": "jasmine JASMINE_CONFIG_PATH=jasmine.integration-test.json",
-    "build": "rimraf dist && rimraf dts && tsc",
+    "build": "rimraf dist && rimraf dts && tsc && npm run unit-test && npm run integration-test",
     "version-minor": "npm version minor && git push && git push --tags",
     "version-patch": "npm version patch && git push && git push --tags",
     "version-major": "npm version major && git push && git push --tags"
@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^2.6.0",
+    "decorated-ts-hub": "^2.6.4",
     "jasmine": "^2.8.0",
     "rimraf": "^2.6.1",
     "typescript": "^2.5.3"
