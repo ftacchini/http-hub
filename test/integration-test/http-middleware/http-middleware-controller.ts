@@ -44,7 +44,7 @@ export class HttpMiddlewareController {
 
     @BeforeExecution(RegisterCall)
     @Route(HttpAll)
-    public middlewareTest(): void {
+    public middlewareTest(): any {
         this.operationsRegistry.register(CONTROLLER_CALLED);
     }
 

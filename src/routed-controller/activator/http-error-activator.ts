@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ErrorRequestHandler } from 'express-serve-static-core';
 import { inject, injectable } from 'inversify';
-import { FunctionReader, Middleware, ParameterReader, TsHubLogger, Types } from 'ts-hub';
+import { ActivationContextProvider, Middleware, ParameterReader, TsHubLogger, Types } from 'ts-hub';
 
 import { HttpActivatorMiddleware } from '../middleware/http-activator-middleware';
 import { HttpResult } from './../response';
@@ -11,10 +11,10 @@ import { HttpActivator } from './http-activator';
 export class HttpErrorActivator extends HttpActivator<ErrorRequestHandler> {
 
     constructor(
-        @inject(Types.FunctionReader) functionReader: FunctionReader,
+        @inject(Types.ActivationContextProvider) activationContextProvider: ActivationContextProvider,
         @inject(Types.ParamsReader) paramsReader: ParameterReader,
         @inject(Types.TsHubLogger) tsHubLogger: TsHubLogger) {
-        super(functionReader, paramsReader, tsHubLogger);
+        super(activationContextProvider, paramsReader, tsHubLogger);
     }
 
 

@@ -1,7 +1,7 @@
 import { ErrorRequestHandler, NextFunction, Request, RequestHandler, Response, Router } from 'express';
 import { injectable, unmanaged } from 'inversify';
 import {
-    FunctionReader,
+    ActivationContextProvider,
     Middleware,
     ParameterBuilder,
     ParameterReader,
@@ -17,10 +17,10 @@ import { HttpContentTypeResponse, HttpResult } from './../response';
 export abstract class HttpActivator<HttpRequestHandler extends RequestHandler | ErrorRequestHandler> extends AbstractControllerActivator<Router, HttpRequestHandler> {
 
     constructor(
-        @unmanaged() functionReader: FunctionReader,
+        @unmanaged() activationContextProvider: ActivationContextProvider,
         @unmanaged() paramsReader: ParameterReader,
         @unmanaged() tsHubLogger: TsHubLogger) {
-        super(functionReader, paramsReader, tsHubLogger);
+        super(activationContextProvider, paramsReader, tsHubLogger);
     }
 
 

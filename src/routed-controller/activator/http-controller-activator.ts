@@ -1,6 +1,6 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { inject, injectable } from 'inversify';
-import { FunctionReader, Middleware, ParameterReader, TsHubLogger, Types } from 'ts-hub';
+import { ActivationContextProvider, Middleware, ParameterReader, TsHubLogger, Types } from 'ts-hub';
 
 import { HttpActivatorMiddleware } from '../middleware/http-activator-middleware';
 import { HttpResult } from './../response';
@@ -10,10 +10,10 @@ import { HttpActivator } from './http-activator';
 export class HttpControllerActivator extends HttpActivator<RequestHandler> {
 
     constructor(
-        @inject(Types.FunctionReader) functionReader: FunctionReader,
+        @inject(Types.ActivationContextProvider) activationContextProvider: ActivationContextProvider,
         @inject(Types.ParamsReader) paramsReader: ParameterReader,
         @inject(Types.TsHubLogger) tsHubLogger: TsHubLogger) {
-        super(functionReader, paramsReader, tsHubLogger);
+        super(activationContextProvider, paramsReader, tsHubLogger);
     }
 
 
